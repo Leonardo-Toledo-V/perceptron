@@ -1,6 +1,6 @@
 import numpy as np
 import tkinter as tk
-from logic.graphics import graphic
+from logic.graphics import plot_error_evolution, plot_weights_evolution
 
 class Perceptron:
     def __init__(self,eta, weight, X, Y):
@@ -27,7 +27,8 @@ def initialization(data):
 def cycle(neuron, epoch):
     for i in range(epoch):
         training(neuron)
-    graphic(weights, err)
+    plot_weights_evolution(weights)
+    plot_error_evolution(err)
     err.clear()
     weights.clear()
 

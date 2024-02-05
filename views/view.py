@@ -48,6 +48,7 @@ ttk.Entry(mainframe, textvariable=eta).grid(column=2, row=1, sticky=W)
 
 epoch = IntVar()
 ttk.Label(mainframe, text="Número de iteraciones:").grid(column=1, row=3, sticky=W)
+epoch.set("100000")
 ttk.Entry(mainframe, textvariable=epoch).grid(column=2, row=3, sticky=W)
 
 ttk.Button(mainframe, text="Entrenar", command=save_data).grid(column=3, row=4, sticky=W)

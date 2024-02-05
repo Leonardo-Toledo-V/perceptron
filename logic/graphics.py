@@ -1,27 +1,27 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def graphic(weights, err):
+def plot_weights_evolution(weights, save_filename="weights-evolution.jpg"):
     fig, axes = plt.subplots(figsize=(8, 6))
-    we = np.array(weights)
-    iterations = list(range(1, len(we) + 1))
-    for i in range(we.shape[1]):
-        axes.plot(iterations, we[:, i], label=f'w{i}', linestyle="-")
+    iterations = list(range(1, len(weights) + 1))
+    weights_array = np.array(weights)
+    for i in range(weights_array.shape[1]):
+        axes.plot(iterations, weights_array[:, i], label=f'w{i}', linestyle="-")
     axes.set_title('Evolución de pesos por generación')
-    plt.xlabel('Iteración')
-    plt.ylabel('Valor del Peso')
-    plt.legend()
-    plt.savefig("weights-evolution.jpg")
+    axes.set_xlabel('Iteración')
+    axes.set_ylabel('Valor del Peso')
+    axes.legend()
+    plt.savefig(save_filename)
     plt.show()
     plt.close(fig)
-    #siguiente grafica 
-    errors = np.array(err)
+
+def plot_error_evolution(errors, save_filename="error-evolution.jpg"):
     fig, axes = plt.subplots(figsize=(8, 6))
-    for i in range(we.shape[1]):
-        axes.plot(iterations, errors, linestyle="-")
+    iterations = list(range(1, len(errors) + 1))
+    axes.plot(iterations, errors, linestyle="-" ,c="red")
     axes.set_title('Evolución del error')
     axes.set_xlabel('Iteración')
     axes.set_ylabel('Error')
-    plt.savefig("error-evolution.jpg")
+    plt.savefig(save_filename)
     plt.show()
     plt.close(fig)
