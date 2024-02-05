@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_weights_evolution(weights, save_filename="weights-evolution.jpg"):
+def plot_weights_evolution(weights, save_filename="WeightsEvolution.jpg"):
     fig, axes = plt.subplots(figsize=(8, 6))
     iterations = list(range(1, len(weights) + 1))
     weights_array = np.array(weights)
@@ -15,7 +15,7 @@ def plot_weights_evolution(weights, save_filename="weights-evolution.jpg"):
     plt.show()
     plt.close(fig)
 
-def plot_error_evolution(errors, save_filename="error-evolution.jpg"):
+def plot_error_evolution(errors, save_filename="ErrorEvolution.jpg"):
     fig, axes = plt.subplots(figsize=(8, 6))
     iterations = list(range(1, len(errors) + 1))
     axes.plot(iterations, errors, linestyle="-" ,c="red")

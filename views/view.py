@@ -17,7 +17,18 @@ def upload_csv():
     global csv_read
     filename = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
     if filename:
-        csv_read = pd.read_csv(filename)
+        try:
+            semicolon = pd.read_csv(filename, sep=';')
+            if semicolon.shape[1] > 1:
+                csv_read = semicolon
+                return
+        except pd.errors.ParserError:
+            pass
+        comma = pd.read_csv(filename, sep=',')
+        if comma.shape[1] > 1:
+            csv_read = comma
+        else:
+            print("Error en el formato")
 
 root = Tk()
 root.title("How to train your perceptron")
