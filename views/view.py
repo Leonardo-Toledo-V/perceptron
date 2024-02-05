@@ -13,20 +13,26 @@ class DataObject:
     def __str__(self):
         return f"Tasa de aprendizaje: {self.eta}, \n Tolerancia: {self.tolerancy}, \n Epoch: {self.epoch}, \n Data:\n{self.csv_read}"
 
+def read_csv(filename, delimiter):
+    try:
+        data = pd.read_csv(filename, sep=delimiter)
+        if data.shape[1] > 1:
+            return data
+    except pd.errors.ParserError:
+        pass
+    return None
+
 def upload_csv():
     global csv_read
     filename = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
     if filename:
-        try:
-            semicolon = pd.read_csv(filename, sep=';')
-            if semicolon.shape[1] > 1:
-                csv_read = semicolon
-                return
-        except pd.errors.ParserError:
-            pass
-        comma = pd.read_csv(filename, sep=',')
-        if comma.shape[1] > 1:
-            csv_read = comma
+        semicolon_data = read_csv(filename, ';')
+        comma_data = read_csv(filename, ',')
+
+        if semicolon_data is not None and not semicolon_data.empty:
+            csv_read = semicolon_data
+        elif comma_data is not None and not comma_data.empty:
+            csv_read = comma_data
         else:
             print("Error en el formato")
 
