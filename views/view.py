@@ -56,7 +56,7 @@ def save_data():
 
 eta = StringVar()
 ttk.Label(mainframe, text="Tasa de aprendizaje:").grid(column=1, row=1, sticky=W)
-eta.set("0.00000001")
+eta.set("0.000001")
 ttk.Entry(mainframe, textvariable=eta).grid(column=2, row=1, sticky=W)
 
 tolerancy = IntVar()
@@ -65,7 +65,7 @@ ttk.Entry(mainframe, textvariable=tolerancy).grid(column=2, row=2, sticky=W)
 
 epoch = IntVar()
 ttk.Label(mainframe, text="Número de iteraciones:").grid(column=1, row=3, sticky=W)
-epoch.set(100000)
+epoch.set(10000)
 ttk.Entry(mainframe, textvariable=epoch).grid(column=2, row=3, sticky=W)
 
 ttk.Button(mainframe, text="Entrenar", command=save_data).grid(column=3, row=4, sticky=W)

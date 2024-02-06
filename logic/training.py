@@ -23,7 +23,7 @@ def initialization(data):
     X.insert(0, None, 1)
     X = X.to_numpy()
     weights = np.array( [round(w, 2) for w in np.random.uniform(-1, 1, num_columns)]).reshape(1, -1)
-    weightList.append( weights.flatten())
+    #weightList.append( weights.flatten())
     neuron = Perceptron(data.eta,weights, X, Y, data.tolerancy)
     cycle(neuron, data.epoch)
 
@@ -35,14 +35,14 @@ def cycle(neuron, epoch):
     resume(weightList, epoch, neuron.eta, neuron.tolerancy)
 
 def training(neuron):
+    weightList.append(neuron.weight.flatten().tolist())
     U = np.dot(neuron.X, neuron.weight.T)
     yCalculate = np.vectorize(Perceptron.functionStep)(U)
     error = neuron.Y - yCalculate
     normaError = np.linalg.norm(error)
+    errorList.append(normaError)
     if neuron.tolerancy >= normaError >= 0 or normaError == 0:
         neuron.weight = neuron.weight
     else: 
         newWeights = neuron.eta * np.dot(error.T, neuron.X)
         neuron.weight = neuron.weight + newWeights  
-    weightList.append(neuron.weight.flatten().tolist())
-    errorList.append(normaError)

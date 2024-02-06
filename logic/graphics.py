@@ -4,7 +4,7 @@ import tkinter as tk
 
 def plotWeightsEvolution(weights, save_filename="WeightsEvolution.jpg"):
     fig, axes = plt.subplots(figsize=(8, 6))
-    iterations = list(range(1, len(weights) + 1))
+    iterations = list(range(0, len(weights)))
     weights_array = np.array(weights)
     for i in range(weights_array.shape[1]):
         axes.plot(iterations, weights_array[:, i], label=f'w{i}', linestyle="-")
@@ -18,7 +18,7 @@ def plotWeightsEvolution(weights, save_filename="WeightsEvolution.jpg"):
 
 def plotErrorEvolution(errors, save_filename="ErrorEvolution.jpg"):
     fig, axes = plt.subplots(figsize=(8, 6))
-    iterations = list(range(1, len(errors) + 1))
+    iterations = list(range(0, len(errors)))
     axes.plot(iterations, errors, linestyle="-" ,c="red")
     axes.set_title('Evolución de la norma del error')
     axes.set_xlabel('Iteración')
