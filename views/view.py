@@ -5,9 +5,9 @@ import pandas as pd
 import numpy as np
 
 class DataObject:
-    def __init__(self, eta, epoch, csv_read ):
+    def __init__(self, eta, tolerancy, epoch, csv_read ):
         self.eta = eta
-        #self.tolerancy = tolerancy
+        self.tolerancy = tolerancy
         self.epoch = epoch
         self.csv_read = csv_read
     def __str__(self):
@@ -15,7 +15,7 @@ class DataObject:
 
 def read_csv(filename, delimiter):
     try:
-        data = pd.read_csv(filename, sep=delimiter)
+        data = pd.read_csv(filename, sep=delimiter, header=None)
         if data.shape[1] > 1:
             return data
     except pd.errors.ParserError:
@@ -48,10 +48,10 @@ for i in range(4):
 
 def save_data():
     eta_value = float(eta.get())
-    #tolerancy_value = tolerancy.get()
+    tolerancy_value = tolerancy.get()
     epoch_value = epoch.get()
     csv_read_value = csv_read
-    data = DataObject(eta_value, epoch_value, csv_read_value)
+    data = DataObject(eta_value, tolerancy_value, epoch_value, csv_read_value)
     initialization(data)        
 
 eta = StringVar()
@@ -59,13 +59,13 @@ ttk.Label(mainframe, text="Tasa de aprendizaje:").grid(column=1, row=1, sticky=W
 eta.set("0.00000001")
 ttk.Entry(mainframe, textvariable=eta).grid(column=2, row=1, sticky=W)
 
-#tolerancy = StringVar()
-#ttk.Label(mainframe, text="Tolerancia:").grid(column=1, row=2, sticky=W)
-#ttk.Entry(mainframe, textvariable=tolerancy).grid(column=2, row=2, sticky=W)
+tolerancy = IntVar()
+ttk.Label(mainframe, text="Tolerancia:").grid(column=1, row=2, sticky=W)
+ttk.Entry(mainframe, textvariable=tolerancy).grid(column=2, row=2, sticky=W)
 
 epoch = IntVar()
 ttk.Label(mainframe, text="Número de iteraciones:").grid(column=1, row=3, sticky=W)
-epoch.set("100000")
+epoch.set(100000)
 ttk.Entry(mainframe, textvariable=epoch).grid(column=2, row=3, sticky=W)
 
 ttk.Button(mainframe, text="Entrenar", command=save_data).grid(column=3, row=4, sticky=W)
